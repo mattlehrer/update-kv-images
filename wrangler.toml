@@ -1,18 +1,13 @@
-name = "miniflare-typescript-esbuild-jest"
+name = "update-kv-images"
 type = "javascript"
 
-account_id = ""
+account_id = "7e5099001e49da7bd8e6f6eeb7e602e8"
 workers_dev = true
 # route = ""
 # zone_id = ""
 
-compatibility_date = "2021-11-15"
+compatibility_date = "2022-02-15"
 compatibility_flags = []
-
-[durable_objects]
-bindings = [
-  { name = "COUNTER", class_name = "Counter" }
-]
 
 [[migrations]]
 tag = "v1"
@@ -27,4 +22,14 @@ dir = "dist"
 main = "./index.mjs"
 
 [miniflare]
-durable_objects_persist = true
+kv_persist = true
+
+[[kv_namespaces]]
+binding = "CORRUPTIONS"
+preview_id = "3a3347ec91f3422eaa16f64e02f51869"
+id = "caeaaa50e7eb486dac05188d607f8393"
+
+# [secrets]
+# ALCHEMY_URL
+# MORALIS_URL
+# MORALIS_APP_ID

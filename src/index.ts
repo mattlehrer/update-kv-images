@@ -1,23 +1,29 @@
-export async function handleRequest(request: Request, env: Bindings) {
-  // Match route against pattern /:name/*action
-  const url = new URL(request.url);
-  const match = /\/(?<name>[^/]+)(?<action>.*)/.exec(url.pathname);
-  if (!match?.groups) {
-    // If we didn't specify a name, default to "test"
-    return Response.redirect(`${url.origin}/test/increment`, 302);
-  }
+import { ethers } from 'ethers';
 
-  // Forward the request to the named Durable Object...
-  const { COUNTER } = env;
-  const id = COUNTER.idFromName(match.groups.name);
-  const stub = COUNTER.get(id);
-  // ...removing the name prefix from URL
-  url.pathname = match.groups.action;
-  return stub.fetch(url.toString());
+const numBlocksToSkip = 6500;
+
+export async function handleRequest(request: Request, env: Bindings) {
+	const { CORRUPTIONS, ALCHEMY_URL } = env;
+	try {
+		const json = await request.json<{ tokenid: number; count: number }>();
+		if (typeof json !== 'object' || json === null) {
+			return new Response('Invalid JSON', { status: 400 });
+		}
+		const provider = new ethers.providers.JsonRpcProvider(ALCHEMY_URL);
+		const latestBlock = await provider.getBlockNumber();
+		// console.log(latestBlock);
+		// const latestBlock =
+		// 	Math.floor((await provider.getBlockNumber()) / numBlocksToSkip) *
+		// 	numBlocksToSkip;
+
+		return new Response('hey');
+	} catch (error) {
+		console.log(JSON.stringify(error, null, 2));
+		return new Response(JSON.stringify(error, null, 2), { status: 400 });
+	}
 }
 
 const worker: ExportedHandler<Bindings> = { fetch: handleRequest };
 
 // Make sure we export the Counter Durable Object class
-export { Counter } from "./counter";
 export default worker;

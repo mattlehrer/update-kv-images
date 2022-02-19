@@ -1,3 +1,4 @@
 interface Bindings {
-  COUNTER: DurableObjectNamespace;
+	ALCHEMY_URL: string;
+	CORRUPTIONS: KVNamespace;
 }
