@@ -17,6 +17,7 @@
     "@cloudflare/workers-types": "^3.4.0",
     "@types/jest": "^27.4.0",
     "esbuild": "^0.14.21",
+    "esbuild-plugin-replace": "^1.2.0",
     "jest": "^27.5.1",
     "jest-environment-miniflare": "^2.3.0",
     "miniflare": "^2.3.0",
