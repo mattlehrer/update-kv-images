@@ -29,7 +29,6 @@
     "babel-loader": "^8.2.3",
     "entities": "^3.0.1",
     "ethers": "^5.5.4",
-    "node-html-parser": "^5.2.0",
-    "web3": "^1.7.0"
+    "node-html-parser": "^5.2.0"
   }
 }
